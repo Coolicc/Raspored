@@ -1,0 +1,77 @@
+<div class="row">
+    <div class="col-md-3">
+        <form class="py-3" [formGroup]='coursesForm' (ngSubmit)="add()">
+            <div class="form-group">
+              <label for="name">Naziv:</label>
+              <input type="text" class="form-control" id="name" formControlName="name">
+            </div>
+            <div class="form-group">
+                <label for="name">Godina:</label>
+                <select class="form-control" id="godina" formControlName="year">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <input type="checkbox" id="obavezan" formControlName="mandatory"> Obavezan
+            </div>
+            <div class="form-group">
+                <label for="name">Broj predavača:</label>
+                <select class="form-control" id="brojPredavaca" (change)="onNumberLecturersChange($event.target.value)" formControlName="numberOfLecturers">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                </select>
+            </div>
+            <div formArrayName="lecturers">
+                <div *ngFor="let lecturerGroup of coursesForm.get('lecturers').controls; let i = index" [formGroupName]="i">
+                    <h5>Predavač {{i + 1}}:</h5>
+                    <div class="form-group">
+                        <label for="name">Profesor:</label>
+                        <select class="form-control" formControlName="professor">
+                            <option *ngFor="let professor of professors" [value]="professor.profesorID">{{professor.ime}} {{professor.prezime}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Tip predavača:</label>
+                        <input type="text" class="form-control" formControlName="type">
+                    </div>
+                </div>
+            </div>
+                <button type="submit" class="btn btn-primary m-1">Dodaj</button>
+                <button [disabled]="selectedCourse == null" (click)="update()" type="button" class="btn btn-primary m-1">Izmeni</button>
+                <button [disabled]="selectedCourse == null" (click)="delete()" type="button" class="btn btn-primary m-1">Obriši</button>
+        </form>
+    </div>
+    <div class="col-md-9 border-left">
+        <table class="table table-striped table-hover">
+            <thead>
+              <tr>
+                <th>Naziv</th>
+                <th>Godina</th>
+                <th>Obavezan</th>
+                <th>Predavači</th>
+              </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let course of courses" (click)="onRowSelect(course)">
+                <td>{{course.naziv}}</td>
+                <td>{{course.godina}}</td>
+                <td>{{course.obavezan ? "Da" : "Ne"}}</td>
+                <td>{{professorsToString(course.predavaci)}}</td>
+            </tr>
+            </tbody>
+          </table>
+    </div>
+</div>

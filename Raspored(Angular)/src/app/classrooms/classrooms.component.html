@@ -1,0 +1,32 @@
+<div class="row">
+    <div class="col-md-3">
+        <form class="py-3" (ngSubmit)="add()" #f="ngForm">
+            <div *ngIf="errorMessage !== null" class="alert alert-danger" role="alert">
+              <button type="button" class="close" data-dismiss="alert" (click)="closeErrorMessage()">&times;</button>
+              {{errorMessage}}
+            </div>
+            <div class="form-group">
+              <label for="name">Naziv učionice:</label>
+              <input type="text" class="form-control" id="name" name="name" ngModel>
+            </div>
+                <button type="submit" class="btn btn-primary m-1">Dodaj</button>
+                <button [disabled]="selectedClassroom == null" (click)="update()" type="button" class="btn btn-primary m-1">Izmeni</button>
+                <button [disabled]="selectedClassroom == null" (click)="delete()" type="button" class="btn btn-primary m-1">Obriši</button>
+          </form> 
+    </div>
+    <div class="col-md-9 border-left">
+        <table class="table table-striped table-hover">
+            <thead>
+              <tr>
+                <th>Učionica</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let classroom of classrooms" (click)="onRowSelect(classroom)"
+               [ngClass]="{'table-primary': selectedClassroom && selectedClassroom.ucionicaID == classroom.ucionicaID}">
+                <td>{{classroom.naziv}}</td>
+              </tr>
+            </tbody>
+          </table>
+    </div>
+</div>

@@ -1,0 +1,63 @@
+<div class="row">
+        <div class="col-md-3">
+            <form class="py-3" (ngSubmit)="add()" #f="ngForm">
+                <div *ngIf="errorMessage !== null" class="alert alert-danger" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" (click)="closeErrorMessage()">&times;</button>
+                    {{errorMessage}}
+                </div>
+                <div class="form-group">
+                    <label for="name">Predmet:</label>
+                    <select class="form-control" id="predmet" name="course" (change)="onCourseSelect($event.target.value)" ngModel>
+                        <option *ngFor="let course of courses" [value]="course.predmetID">{{course.naziv}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="name">Predavač:</label>
+                    <select class="form-control" id="predavac" name="lecturer" ngModel>
+                        <option *ngFor="let lecturer of courseLecturers" [value]="lecturer.predavacID">{{lecturer.profesor.ime}} {{lecturer.profesor.prezime}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="name">Učionica:</label>
+                    <select class="form-control" id="ucionica" name="classroom" ngModel>
+                        <option *ngFor="let classroom of classrooms" [value]="classroom.ucionicaID">{{classroom.naziv}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="name">Tip predavanja:</label>
+                    <input type="text" name="type" class="form-control" ngModel>
+                </div>
+                <div class="form-group">
+                    <label for="name">Dan:</label>
+                    <select class="form-control" id="day" name="day" ngModel>
+                        <option value="Ponedeljak">Ponedeljak</option>
+                        <option value="Utorak">Utorak</option>
+                        <option value="Sreda">Sreda</option>
+                        <option value="Četvrtak">Četvrtak</option>
+                        <option value="Petak">Petak</option>
+                        <option value="Subota">Subota</option>
+                        <option value="Nedelja">Nedelja</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="name">Od:</label>
+                    <input type="time" class="form-control" name="from" ngModel>
+                    <label for="name">Do:</label>
+                    <input type="time" class="form-control" name="to" ngModel>
+                </div>
+                    <button type="submit" class="btn btn-primary m-1">Dodaj</button>
+                    <button [disabled]="selectedLecture == null" (click)="update()" type="button" class="btn btn-primary m-1">Izmeni</button>
+                    <button [disabled]="selectedLecture == null" (click)="delete()" type="button" class="btn btn-primary m-1">Obriši</button>
+            </form>
+        </div>
+        <div class="col-md-9 border-left">
+            <mwl-calendar-week-view
+            [hourSegments]="4"
+            [viewDate]="viewDate"
+            [events]="events"
+            (eventClicked)="handleEvent('Clicked', $event.event)"
+            (eventTimesChanged)="eventTimesChanged($event)"
+            [daysInWeek]="7">
+            </mwl-calendar-week-view>
+        </div>
+    </div>
