@@ -8,7 +8,7 @@
 		<version>2.1.6.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>rs.ac.uns.pmf.diplomski.OgnjenKulic</groupId>
+	<groupId>OgnjenKulic</groupId>
 	<artifactId>Raspored</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
@@ -43,6 +43,22 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+    		<groupId>net.sf.jasperreports</groupId>
+    		<artifactId>jasperreports</artifactId>
+    		<version>6.9.0</version>
+		</dependency>
+		<dependency>
+    		<groupId>local.jasperFontOverrides</groupId>
+    		<artifactId>local.jasperFontOverrides</artifactId>
+    		<version>1.0</version>
+   			<scope>system</scope>
+    		<systemPath>${basedir}/src/main/resources/jasperreports/fonts/tahoma.jar</systemPath>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
 	</dependencies>
 

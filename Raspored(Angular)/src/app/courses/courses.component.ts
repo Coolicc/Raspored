@@ -71,7 +71,12 @@ export class CoursesComponent implements OnInit {
 			lecturers
 		);
 		this.courseService.addCourse(course).subscribe((newCourse: Course) => {
-			this.courses.push(newCourse);
+			for (let i = 0; i < this.courses.length; i++) {
+				if (newCourse.naziv < this.courses[i].naziv) {
+					this.courses.splice(i, 0, newCourse);
+					break;
+				}
+			}
 			let nOfLecturers = this.coursesForm.value.numberOfLecturers;
 			this.coursesForm.reset();
 			this.coursesForm.patchValue({numberOfLecturers: nOfLecturers});
@@ -110,6 +115,11 @@ export class CoursesComponent implements OnInit {
 					courseToUpdate.godina = course.godina;
 					courseToUpdate.obavezan = course.obavezan;
 					courseToUpdate.predavaci = lecturers;
+					this.courses.sort((a, b) => {
+						if (a.naziv > b.naziv) return 1;
+						else if (b.naziv > a.naziv) return -1;
+						else return 0;
+					});
 					this.selectedCourse = null;
 					let nOfLecturers = this.coursesForm.value.numberOfLecturers;
 					this.coursesForm.reset();

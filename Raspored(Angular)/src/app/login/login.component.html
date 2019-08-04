@@ -1,11 +1,15 @@
 <div class="row align-items-center">
     <div class="col-md-4 offset-md-4">
-        <form class="py-3">
+        <form class="py-3" (ngSubmit)="login(f)" #f="ngForm">
+            <div *ngIf="errorMessage !== null" class="alert alert-danger" role="alert">
+                <button type="button" class="close" data-dismiss="alert" (click)="closeErrorMessage()">&times;</button>
+                {{errorMessage}}
+            </div>
             <div class="form-group">
                 <label for="name">Korisničko ime:</label>
-                <input type="text" class="form-control" id="username">
+                <input type="text" class="form-control" id="username" name="username" ngModel>
                 <label for="name">Lozinka:</label>
-                <input type="password" class="form-control" id="password">
+                <input type="password" class="form-control" id="password" name="password" ngModel>
             </div>
                 <button type="submit" class="btn btn-primary form-control">Log in</button>
         </form> 

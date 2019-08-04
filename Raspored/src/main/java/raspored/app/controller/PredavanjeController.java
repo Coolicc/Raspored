@@ -40,7 +40,7 @@ public class PredavanjeController {
 				predavanje.getDo_(), predavanje.getPredavacBean().getProfesorBean(),
 				predavanje.getUcionicaBean(), 0)
 				.isEmpty()) {
-			throw new OverlapException("Profesor ili ucionica se preklapaju u"
+			throw new OverlapException("Profesor ili učionica se preklapaju u"
 					+ " tom terminu.");
 		}
 		return predavanjeJPARepo.save(predavanje);

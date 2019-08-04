@@ -26,6 +26,8 @@ public class Raspored implements Serializable {
 	private int godina;
 
 	private String smer;
+	
+	private int prioritet;
 
 	//bi-directional many-to-one association to Predavanje
 	@OneToMany(mappedBy="rasporedBean")
@@ -34,6 +36,20 @@ public class Raspored implements Serializable {
 
 	public Raspored() {
 	}
+	
+	
+
+	public int getPrioritet() {
+		return prioritet;
+	}
+
+
+
+	public void setPrioritet(int prioritet) {
+		this.prioritet = prioritet;
+	}
+
+
 
 	public int getRasporedID() {
 		return this.rasporedID;

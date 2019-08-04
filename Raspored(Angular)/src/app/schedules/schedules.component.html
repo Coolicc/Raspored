@@ -24,17 +24,31 @@
                     <option value="7">7</option>
                     <option value="8">8</option>
                 </select>
+                <input type="hidden" name="priority" ngModel>
             </div>
             <button type="submit" class="btn btn-primary m-1">Dodaj</button>
             <button [disabled]="selectedSchedule == null" (click)="update()" type="button" class="btn btn-primary m-1">Zavrsi izmenu</button>
         </form>
+        <div class="row">
+            <div class="col text-center">
+                <button type="button" class="btn btn-primary m-1" (click)="exportAll()">Izvezi sve rasporede kao PDF</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col text-center">
+                (rasporedi će biti export-ovani u redu u kojem su prikazani)
+            </div>
+        </div>
         <div class="list-group py-3">
                 <div class="list-group-item list-group-item-action" *ngFor="let schedule of schedules"
                 [ngClass]="{'list-group-item-primary': selectedSchedule && selectedSchedule.rasporedID == schedule.rasporedID}">
                     {{schedule.godina}}. godina, {{schedule.smer}}, {{schedule.naziv}}
+                    <button type="button" class="btn btn-primary m-1 float-right" (click)="export(schedule)">PDF</button>
                     <button type="button" class="btn btn-primary m-1 float-right" (click)="delete(schedule)">Obriši</button>
                     <button type="button" class="btn btn-primary m-1 float-right" (click)="onRowSelect(schedule)">Izmeni</button>
                     <button type="button" class="btn btn-primary m-1 float-right" (click)="openSchedule(schedule)">Otvori</button>
+                    <button type="button" class="btn btn-primary m-1 float-right" (click)="down(schedule)">&darr;</button>
+                    <button type="button" class="btn btn-primary m-1 float-right" (click)="up(schedule)">&uarr;</button>
                 <!--    <div class="row" *ngIf="selectedSchedule !== null && selectedSchedule.rasporedID === schedule.rasporedID">
                         <form class="form-inline justify-content-center pt-4" (ngSubmit)="update(editForm)" #editForm="ngForm">
                             <div class="form-group">

@@ -26,7 +26,7 @@ public class UcionicaController {
 	
 	@GetMapping(value="/getAll")
 	public List<Ucionica> getAllUcionicas() {
-		return ucionicaJPARepo.findAll();
+		return ucionicaJPARepo.getAllSorted();
 	}
 	
 	@PostMapping(value="/new")

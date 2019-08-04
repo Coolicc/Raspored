@@ -26,7 +26,8 @@ public class RasporedController {
 	
 	@GetMapping(value="/getAll")
 	public List<Raspored> getAllRasporeds() {
-		return rasporedJPARepo.findAll();
+		System.out.println("RASPOREDI");
+		return rasporedJPARepo.getAllByPriority();
 	}
 	
 	@PostMapping(value="/new")
@@ -46,6 +47,7 @@ public class RasporedController {
 			raspored.setGodina(newRaspored.getGodina());
 			raspored.setSmer(newRaspored.getSmer());
 			raspored.setNaziv(newRaspored.getNaziv());
+			raspored.setPrioritet(newRaspored.getPrioritet());
 			return rasporedJPARepo.save(raspored);
 		}).orElseGet(() -> rasporedJPARepo.save(newRaspored));
 		return true;

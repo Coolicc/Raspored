@@ -38,7 +38,12 @@ export class ClassroomsComponent implements OnInit {
 		console.log(this.classroomForm);
 		let classroom: Classroom = new Classroom(null, this.classroomForm.value.name);
 		this.classroomService.addClassroom(classroom).subscribe((newClassroom: Classroom) => {
-			this.classrooms.push(newClassroom);
+			for (let i = 0; i < this.classrooms.length; i++) {
+				if (newClassroom.naziv < this.classrooms[i].naziv) {
+					this.classrooms.splice(i, 0, newClassroom);
+					break;
+				}
+			}
 			this.classroomForm.reset();
 			this.closeErrorMessage();
 		}, (error) => {
@@ -56,6 +61,11 @@ export class ClassroomsComponent implements OnInit {
 				if (res === true) {
 					let classroomToUpdate: Classroom = this.classrooms.find(x => x.ucionicaID == this.selectedClassroom.ucionicaID);
 					classroomToUpdate.naziv = classroom.naziv;
+					this.classrooms.sort((a, b) => {
+						if (a.naziv > b.naziv) return 1;
+						else if (b.naziv > a.naziv) return -1;
+						else return 0;
+					});
 					this.selectedClassroom = null;
 					this.classroomForm.reset();
 					this.closeErrorMessage();

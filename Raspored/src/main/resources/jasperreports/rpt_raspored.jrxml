@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.9.0.final using JasperReports Library version 6.9.0-cb8f9004be492ccc537180b49c026951f4220bf3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="raspored" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3051becc-7f53-4667-9cd5-03fb5f6c3ee6">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="raspored" class="java.lang.String"/>
+	<field name="predmet" class="java.lang.String"/>
+	<field name="sala" class="java.lang.String"/>
+	<field name="predavac" class="java.lang.String"/>
+	<field name="tip" class="java.lang.String"/>
+	<field name="dan" class="java.lang.String"/>
+	<field name="danRedniBr" class="java.lang.Integer"/>
+	<field name="pocetak" class="java.util.Date"/>
+	<field name="kraj" class="java.util.Date"/>
+	<field name="vreme" class="java.lang.String"/>
+	<group name="RasporedGroup">
+		<groupExpression><![CDATA[$F{raspored}]]></groupExpression>
+		<groupHeader>
+			<band height="80">
+				<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				<staticText>
+					<reportElement mode="Opaque" x="0" y="50" width="80" height="30" forecolor="#FFFFFF" backcolor="#0275D8" uuid="79aa8a4f-ccfa-40a3-af93-5dae569eceba"/>
+					<box>
+						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#FFFFFF"/>
+						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#FFFFFF"/>
+						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#FFFFFF"/>
+						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#FFFFFF"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="tahoma" size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Vreme]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Opaque" x="80" y="50" width="106" height="30" forecolor="#FFFFFF" backcolor="#0275D8" uuid="89ca74ad-f21f-441b-be77-398747f2f35e"/>
+					<box>
+						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#FFFFFF"/>
+						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#FFFFFF"/>
+						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#FFFFFF"/>
+						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#FFFFFF"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="tahoma" size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Sala]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Opaque" x="186" y="50" width="192" height="30" forecolor="#FFFFFF" backcolor="#0275D8" uuid="a8a9a1ab-0a10-4c32-9243-02dfd36519a9"/>
+					<box>
+						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#FFFFFF"/>
+						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#FFFFFF"/>
+						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#FFFFFF"/>
+						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#FFFFFF"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="tahoma" size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Predmet]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Opaque" x="378" y="50" width="112" height="30" forecolor="#FFFFFF" backcolor="#0275D8" uuid="7c956e95-365c-4101-9742-bf947bfe35c3"/>
+					<box>
+						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#FFFFFF"/>
+						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#FFFFFF"/>
+						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#FFFFFF"/>
+						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#FFFFFF"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="tahoma" size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Predavač]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Opaque" x="490" y="50" width="65" height="30" forecolor="#FFFFFF" backcolor="#0275D8" uuid="cec73173-1b24-4077-bf7c-8de3a41cd184">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<box>
+						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#FFFFFF"/>
+						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#FFFFFF"/>
+						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#FFFFFF"/>
+						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#FFFFFF"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="tahoma" size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Tip]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="80" y="10" width="400" height="40" uuid="983b232f-b62c-42e8-a6f6-5eec1b853ce9"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="tahoma" size="16" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{raspored}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="30">
+				<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			</band>
+		</groupFooter>
+	</group>
+	<group name="DanGroup">
+		<groupExpression><![CDATA[$F{danRedniBr}]]></groupExpression>
+		<groupHeader>
+			<band height="30">
+				<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				<textField>
+					<reportElement mode="Opaque" x="0" y="0" width="555" height="30" forecolor="#FFFFFF" backcolor="#0275D8" uuid="78e4d7de-e974-4fc4-a092-e8aa2131173e">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+					</reportElement>
+					<box>
+						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#FFFFFF"/>
+						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#FFFFFF"/>
+						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#FFFFFF"/>
+						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#FFFFFF"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="tahoma" size="12" isBold="true"/>
+						<paragraph leftIndent="0"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dan}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="80" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="555" height="80" forecolor="#FFFFFF" backcolor="#0275D8" uuid="a0b68a7b-eed6-4602-afb1-14f1d40a6df1">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="tahoma" size="33" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Raspored]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="30" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="0" y="0" width="80" height="30" uuid="7896f60c-9931-4efc-ae8d-0567bf9bbff4"/>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="tahoma"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{vreme}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="80" y="0" width="106" height="30" uuid="3488a193-030f-43a5-8133-3ef747bfc485"/>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="tahoma"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sala}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="186" y="0" width="192" height="30" uuid="23a28727-aac1-4500-9a6c-00d210aa5fa0"/>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="tahoma"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{predmet}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="378" y="0" width="112" height="30" uuid="6134b11c-e37b-4e30-b4dd-8492eb31c47c"/>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="tahoma"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{predavac}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="490" y="0" width="64" height="30" uuid="6cf5d150-5fea-4a29-b01f-0e9fa9f3fb30"/>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="tahoma"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tip}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+		</band>
+	</summary>
+</jasperReport>

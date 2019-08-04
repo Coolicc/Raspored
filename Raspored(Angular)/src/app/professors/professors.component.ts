@@ -39,7 +39,13 @@ export class ProfessorsComponent implements OnInit {
 		console.log(this.professorForm);
 		let professor: Professor = new Professor(null, this.professorForm.value.name, this.professorForm.value.surname);
 		this.professorService.addProfessor(professor).subscribe((newProfessor: Professor) => {
-			this.professors.push(newProfessor);
+			for (let i = 0; i < this.professors.length; i++) {
+				if (newProfessor.prezime < this.professors[i].prezime || 
+					newProfessor.prezime == this.professors[i].prezime && newProfessor.ime < this.professors[i].ime) {
+					this.professors.splice(i, 0, newProfessor);
+					break;
+				}
+			}
 			this.professorForm.reset();
 			this.closeErrorMessage();
 		}, (error) => {
@@ -58,6 +64,11 @@ export class ProfessorsComponent implements OnInit {
 					let professorToUpdate: Professor = this.professors.find(x => x.profesorID == this.selectedProfessor.profesorID);
 					professorToUpdate.ime = professor.ime;
 					professorToUpdate.prezime = professor.prezime;
+					this.professors.sort((a, b) => {
+						if (a.prezime < b.prezime || a.prezime == b.prezime && a.ime < b.ime) return -1;
+						else if (a.prezime > b.prezime || a.prezime == b.prezime && a.ime > b.ime) return 1;
+						else return 0;
+					});
 					this.selectedProfessor = null;
 					this.professorForm.reset();
 					this.closeErrorMessage();

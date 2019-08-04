@@ -40,7 +40,7 @@ public class PredmetController {
 	
 	@GetMapping(value="/getAll")
 	public List<Predmet> getAllPredmets() {
-		return predmetJPARepo.findAll();
+		return predmetJPARepo.getAllSorted();
 	}
 	
 	@PostMapping(value="/new")
@@ -75,7 +75,7 @@ public class PredmetController {
 	
 	@GetMapping(value="/getAllWithPredavacs")
 	public List<PredmetBean> getAllPredmetsWithPredavacs() {
-		return predmetJPARepo.findAll().stream().map(predmet -> {
+		return predmetJPARepo.getAllSorted().stream().map(predmet -> {
 			PredmetBean predmetBean = new PredmetBean();
 			predmetBean.setPredmetID(predmet.getPredmetID());
 			predmetBean.setNaziv(predmet.getNaziv());

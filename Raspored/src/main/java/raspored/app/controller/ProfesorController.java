@@ -26,7 +26,7 @@ public class ProfesorController {
 	
 	@GetMapping(value="/getAll")
 	public List<Profesor> getAllProfesors() {
-		return profesorJPARepo.findAll();
+		return profesorJPARepo.getAllSorted();
 	}
 	
 	@PostMapping(value="/new")

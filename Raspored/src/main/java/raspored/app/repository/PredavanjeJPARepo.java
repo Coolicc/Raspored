@@ -24,4 +24,12 @@ public interface PredavanjeJPARepo extends JpaRepository<Predavanje, Integer> {
 	@Query("SELECT p FROM Predavanje p WHERE p.rasporedBean.rasporedID = :scheduleID")
 	public List<Predavanje> getPredavanjesForSchedule(@Param("scheduleID") int scheduleID);
 	
+	@Query("SELECT p FROM Predavanje p WHERE p.rasporedBean.rasporedID = :scheduleID "
+			+ "ORDER BY p.od ASC")
+	public List<Predavanje> getPredavanjesForReport(@Param("scheduleID") int scheduleID);
+	
+	@Query("SELECT p FROM Predavanje p, Raspored r "
+			+ "WHERE p.rasporedBean.rasporedID = r.rasporedID "
+			+ "ORDER BY r.prioritet ASC, p.od ASC")
+	public List<Predavanje> getAllPredavanjesForReport();
 }

@@ -7,14 +7,15 @@ import { SchedulesComponent } from './schedules/schedules.component';
 import { SchedulePlannerComponent } from './schedule-planner/schedule-planner.component';
 import { LoginComponent } from './login/login.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { AuthGuard } from './login/auth-guard.service';
 
 const appRoutes: Routes = [
-    {path: '', redirectTo: '/ucionice', pathMatch: 'full'},
-    {path: 'ucionice', component: ClassroomsComponent},
-    {path: 'predmeti', component: CoursesComponent},
-    {path: 'profesori', component: ProfessorsComponent},
-    {path: 'rasporedi', component: SchedulesComponent},
-    {path: 'raspored', component: SchedulePlannerComponent},
+    {path: '', redirectTo: 'login', pathMatch: 'full'},
+    {path: 'ucionice', component: ClassroomsComponent, canActivate: [AuthGuard]},
+    {path: 'predmeti', component: CoursesComponent, canActivate: [AuthGuard]},
+    {path: 'profesori', component: ProfessorsComponent, canActivate: [AuthGuard]},
+    {path: 'rasporedi', component: SchedulesComponent, canActivate: [AuthGuard]},
+    {path: 'raspored', component: SchedulePlannerComponent, canActivate: [AuthGuard]},
     {path: 'login', component: LoginComponent},
     {path: '**', component: NotFoundComponent}
 ];
