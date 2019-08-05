@@ -37,31 +37,24 @@ export class CoursesComponent implements OnInit {
 		});
 
 		this.courseService.getCourses().subscribe((data: Course[]) => {
-			console.log(data);
 			this.courses = data;
 			this.closeErrorMessage();
 		}, (error) => {
-			console.log(error);
 			this.errorMessage = error.error;
 		});
 
 		this.professorService.getProfessors().subscribe((data: Professor[]) => {
-			console.log(data);
 			this.professors = data;
 			this.closeErrorMessage();
 		}, (error) => {
-			console.log(error);
 			this.errorMessage = error.error;
 		});
 	}
 
 	add() {
-		console.log("ADD");
-		console.log(this.coursesForm);
 		let lecturers: Lecturer[] = [];
 		for (let i = 0; i < this.coursesForm.value.lecturers.length; i++) {
 			let professor: Professor = this.professors.find(x => x.profesorID == this.coursesForm.value.lecturers[i].professor);
-			console.log(professor);
 			lecturers.push(new Lecturer(null, this.coursesForm.value.lecturers[i].type, professor));
 		}
 		let course: Course = new Course(null,
@@ -71,30 +64,31 @@ export class CoursesComponent implements OnInit {
 			lecturers
 		);
 		this.courseService.addCourse(course).subscribe((newCourse: Course) => {
+			let notInserter: boolean = true;
 			for (let i = 0; i < this.courses.length; i++) {
 				if (newCourse.naziv < this.courses[i].naziv) {
 					this.courses.splice(i, 0, newCourse);
+					notInserter = false;
 					break;
 				}
+			}
+			if (notInserter) {
+				this.courses.push(newCourse);
 			}
 			let nOfLecturers = this.coursesForm.value.numberOfLecturers;
 			this.coursesForm.reset();
 			this.coursesForm.patchValue({numberOfLecturers: nOfLecturers});
 			this.closeErrorMessage();
 		}, (error) => {
-			console.log(error);
 			this.errorMessage = error.error;
 		});	
 	}
 
 	update() {
-		console.log("UPDATE");
-		console.log(this.coursesForm);
 		if (this.selectedCourse !== null) {
 			let lecturers: Lecturer[] = [];
 			for (let i = 0; i < this.coursesForm.value.lecturers.length; i++) {
 				let professor: Professor = this.professors.find(x => x.profesorID == this.coursesForm.value.lecturers[i].professor);
-				console.log(professor);
 				if (i < this.selectedCourse.predavaci.length) {
 					lecturers.push(new Lecturer(this.selectedCourse.predavaci[i].predavacID, this.coursesForm.value.lecturers[i].type, professor));
 				} else {
@@ -127,15 +121,12 @@ export class CoursesComponent implements OnInit {
 					this.closeErrorMessage();
 				}
 			}, (error) => {
-				console.log(error);
 				this.errorMessage = error.error;
 			});
 		}
 	}
 
 	delete() {
-		console.log("DELETE");
-		console.log(this.coursesForm);
 		this.courseService.deleteCourse(this.selectedCourse.predmetID).subscribe((res: boolean) => {
 			if (res === true) {
 				for( var i = 0; i < this.courses.length; i++){ 
@@ -151,13 +142,11 @@ export class CoursesComponent implements OnInit {
 			this.coursesForm.patchValue({numberOfLecturers: nOfLecturers});
 			this.closeErrorMessage(); 
 		}, (error) => {
-			console.log(error);
 			this.errorMessage = error.error;
 		});
 	}
 
 	onRowSelect(course: Course) {
-		console.log(course);
 		this.selectedCourse = course;
 		this.coursesForm.patchValue({
 			name: this.selectedCourse.naziv,
@@ -176,6 +165,8 @@ export class CoursesComponent implements OnInit {
 	}
 
 	professorsToString(lecturers: Lecturer[]): string {
+		if (lecturers.length == 0)
+			return '';
 		let s: string = lecturers[0].profesor.ime + " " + lecturers[0].profesor.prezime;
 		for (let i = 1; i < lecturers.length; i++) {
 			s = s + ", " + lecturers[i].profesor.ime + " " + lecturers[i].profesor.prezime;

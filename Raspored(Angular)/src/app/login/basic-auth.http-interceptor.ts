@@ -11,7 +11,6 @@ export class BasicAuthHtppInterceptorService implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler) {
 
     if (sessionStorage.getItem('username') && sessionStorage.getItem('userToken')) {
-      console.log("INTERCEPTOR");
       req = req.clone({
         setHeaders: {
           'Authorization': sessionStorage.getItem('userToken')

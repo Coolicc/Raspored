@@ -19,42 +19,36 @@ export class ClassroomsComponent implements OnInit {
 	ngOnInit() {
 		this.selectedClassroom = null;
 		this.errorMessage = null;
-		// this.classrooms = this.classroomService.getClassrooms();
-		// this.subscription = this.classroomService.classroomsChanged.subscribe((classrooms: Classroom[]) => {
-		// 	this.classrooms = classrooms;
-		// });
 		this.classroomService.getClassrooms().subscribe((data: Classroom[]) => {
-			console.log(data);
 			this.classrooms = data;
 			this.closeErrorMessage();
 		}, (error) => {
-			console.log(error);
 			this.errorMessage = error.error;
 		});
 	}
 
 	add() {
-		console.log("ADD");
-		console.log(this.classroomForm);
 		let classroom: Classroom = new Classroom(null, this.classroomForm.value.name);
 		this.classroomService.addClassroom(classroom).subscribe((newClassroom: Classroom) => {
+			let notInserter: boolean = true;
 			for (let i = 0; i < this.classrooms.length; i++) {
 				if (newClassroom.naziv < this.classrooms[i].naziv) {
 					this.classrooms.splice(i, 0, newClassroom);
+					notInserter = false;
 					break;
 				}
+			}
+			if (notInserter) {
+				this.classrooms.push(newClassroom);
 			}
 			this.classroomForm.reset();
 			this.closeErrorMessage();
 		}, (error) => {
-			console.log(error);
 			this.errorMessage = error.error;
 		});	
 	}
 
 	update() {
-		console.log("UPDATE");
-		console.log(this.classroomForm);
 		if (this.selectedClassroom !== null) {
 			let classroom: Classroom = new Classroom(this.selectedClassroom.ucionicaID, this.classroomForm.value.name);
 			this.classroomService.updateClassroom(classroom).subscribe((res: boolean) => {
@@ -71,15 +65,12 @@ export class ClassroomsComponent implements OnInit {
 					this.closeErrorMessage();
 				}
 			}, (error) => {
-				console.log(error);
 				this.errorMessage = error.error;
 			});
 		}
 	}
 
 	delete() {
-		console.log("DELETE");
-		console.log(this.classroomForm);
 		this.classroomService.deleteClassroom(this.selectedClassroom.ucionicaID).subscribe((res: boolean) => {
 			if (res === true) {
 				for( var i = 0; i < this.classrooms.length; i++){ 
@@ -93,7 +84,6 @@ export class ClassroomsComponent implements OnInit {
 			this.classroomForm.reset();
 			this.closeErrorMessage(); 
 		}, (error) => {
-			console.log(error);
 			this.errorMessage = error.error;
 		});
 	}
@@ -101,7 +91,6 @@ export class ClassroomsComponent implements OnInit {
 	onRowSelect(classroom: Classroom) {
 		this.selectedClassroom = classroom;
 		this.classroomForm.form.patchValue({name: this.selectedClassroom.naziv});
-		console.log(this.selectedClassroom);
 	}
 
 	closeErrorMessage() {

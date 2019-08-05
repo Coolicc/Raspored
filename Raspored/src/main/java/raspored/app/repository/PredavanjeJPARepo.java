@@ -8,7 +8,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import raspored.app.model.Predavanje;
-import raspored.app.model.Predmet;
 import raspored.app.model.Profesor;
 import raspored.app.model.Ucionica;
 

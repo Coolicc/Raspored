@@ -23,13 +23,11 @@ export class LoginComponent implements OnInit {
   	login(form: NgForm) {
 		this.loginService.login(form.value.username, form.value.password).subscribe((res: Boolean) => {
 			if (res) {
-				console.log("inside!");
 				sessionStorage.setItem('username', form.value.username);
 				sessionStorage.setItem('userToken', 'Basic ' + btoa(form.value.username + ':' + form.value.password));
 				this.router.navigate(['/rasporedi']);
 			}
 		}, (error) => {
-			console.log(error);
 			if (error.status == 401) {
 				this.errorMessage = 'Nepoznato korsničko ime ili lozinka';
 			} else {

@@ -26,7 +26,6 @@ public class RasporedController {
 	
 	@GetMapping(value="/getAll")
 	public List<Raspored> getAllRasporeds() {
-		System.out.println("RASPOREDI");
 		return rasporedJPARepo.getAllByPriority();
 	}
 	

@@ -57,7 +57,9 @@
             [events]="events"
             (eventClicked)="handleEvent('Clicked', $event.event)"
             (eventTimesChanged)="eventTimesChanged($event)"
-            [daysInWeek]="7">
+            [daysInWeek]="daysInWeek"
+            [dayStartHour]="dayStartHour"
+            [dayEndHour]="dayEndHour">
             </mwl-calendar-week-view>
         </div>
     </div>

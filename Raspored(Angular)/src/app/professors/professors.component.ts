@@ -20,43 +20,37 @@ export class ProfessorsComponent implements OnInit {
 	ngOnInit() {
 		this.selectedProfessor = null;
 		this.errorMessage = null;
-		// this.professors = this.professorService.getProfessors();
-		// this.subscription = this.professorService.professorsChanged.subscribe((professors: Professor[]) => {
-		// 	this.professors = professors;
-		// });
 		this.professorService.getProfessors().subscribe((data: Professor[]) => {
-			console.log(data);
 			this.professors = data;
 			this.closeErrorMessage();
 		}, (error) => {
-			console.log(error);
 			this.errorMessage = error.error;
 		});
 	}
 
 	add() {
-		console.log("ADD");
-		console.log(this.professorForm);
 		let professor: Professor = new Professor(null, this.professorForm.value.name, this.professorForm.value.surname);
 		this.professorService.addProfessor(professor).subscribe((newProfessor: Professor) => {
+			let notInserter: boolean = true;
 			for (let i = 0; i < this.professors.length; i++) {
 				if (newProfessor.prezime < this.professors[i].prezime || 
 					newProfessor.prezime == this.professors[i].prezime && newProfessor.ime < this.professors[i].ime) {
 					this.professors.splice(i, 0, newProfessor);
+					notInserter = false;
 					break;
 				}
+			}
+			if (notInserter) {
+				this.professors.push(newProfessor);
 			}
 			this.professorForm.reset();
 			this.closeErrorMessage();
 		}, (error) => {
-			console.log(error);
 			this.errorMessage = error.error;
 		});	
 	}
 
 	update() {
-		console.log("UPDATE");
-		console.log(this.professorForm);
 		if (this.selectedProfessor !== null) {
 			let professor: Professor = new Professor(this.selectedProfessor.profesorID, this.professorForm.value.name, this.professorForm.value.surname);
 			this.professorService.updateProfessor(professor).subscribe((res: boolean) => {
@@ -74,15 +68,12 @@ export class ProfessorsComponent implements OnInit {
 					this.closeErrorMessage();
 				}
 			}, (error) => {
-				console.log(error);
 				this.errorMessage = error.error;
 			});
 		}
 	}
 
 	delete() {
-		console.log("DELETE");
-		console.log(this.professorForm);
 		this.professorService.deleteProfessor(this.selectedProfessor.profesorID).subscribe((res: boolean) => {
 			if (res === true) {
 				for( var i = 0; i < this.professors.length; i++){ 
@@ -96,7 +87,6 @@ export class ProfessorsComponent implements OnInit {
 			this.professorForm.reset();
 			this.closeErrorMessage();
 		}, (error) => {
-			console.log(error);
 			this.errorMessage = error.error;
 		});
 	}
@@ -104,7 +94,6 @@ export class ProfessorsComponent implements OnInit {
 	onRowSelect(professor: Professor) {
 		this.selectedProfessor = professor;
 		this.professorForm.form.patchValue({name: this.selectedProfessor.ime, surname: this.selectedProfessor.prezime});
-		console.log(professor);
 	}
 
 	closeErrorMessage() {

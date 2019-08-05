@@ -1,6 +1,5 @@
 package raspored.app.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -95,7 +94,6 @@ public class PredmetController {
 	
 	@PostMapping(value="/newWithPredavacs")
 	public PredmetBean newPredmetWithPredavacs(@RequestBody PredmetBean predmetBean) {
-		System.out.println(predmetBean);
 		Predmet predmet = new Predmet();
 		predmet.setNaziv(predmetBean.getNaziv());
 		predmet.setGodina(predmetBean.getGodina());
@@ -150,7 +148,6 @@ public class PredmetController {
 	
 	@PutMapping(value="/updateWithPredavacs")
 	public boolean updateWithPredavacs(@RequestBody PredmetBean newPredmetBean) {
-		System.out.println(newPredmetBean);
 		Predmet predmet = predmetJPARepo.findById(newPredmetBean.getPredmetID()).orElseThrow(() ->
 				new NotFoundException("Profesor sa ID: " + newPredmetBean.getPredmetID()
 				+ "ne postoji."));

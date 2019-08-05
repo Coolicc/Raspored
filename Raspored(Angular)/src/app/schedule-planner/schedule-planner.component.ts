@@ -16,6 +16,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ScheduleService } from '../schedules/schedules.service';
 import { Schedule } from '../schedules/schedule.model';
 import { LectureBean } from './lectureBean.model';
+import { environment } from 'src/environments/environment';
 
 @Component({
 	selector: 'app-schedule-planner',
@@ -39,6 +40,9 @@ export class SchedulePlannerComponent implements OnInit {
 	viewDate: Date = new Date(1970, 5, 1, 0, 0, 0, 0);
 	events: CalendarEvent[] = [];
 	schedule: Schedule;
+	daysInWeek: number = environment.daysInWeek;
+	dayStartHour: number = environment.dayStartHour;
+	dayEndHour: number = environment.dayEndHour;
 
 	constructor(private schedulePlannerService: SchedulePlannerService, private courseService: CourseService,
 		 private classroomService: ClassroomService, private route: ActivatedRoute, private scheduleService: ScheduleService) { }
@@ -48,7 +52,6 @@ export class SchedulePlannerComponent implements OnInit {
 		this.errorMessage = null;
 		let scheduleID =  this.route.snapshot.queryParams['schedule'];
 		this.schedulePlannerService.getLectures(scheduleID).subscribe((data: Lecture[]) => {
-			console.log(data);
 			this.lectures = data;
 			let eventsToAdd: CalendarEvent[] = [];
 			this.lectures.forEach(lecture => {
@@ -69,41 +72,31 @@ export class SchedulePlannerComponent implements OnInit {
 				});
 			});
 			this.events = [...this.events, ...eventsToAdd];
-			console.log(this.events);
 			this.closeErrorMessage();
 		}, (error) => {
-			console.log(error);
 			this.errorMessage = error.error;
 		});
 		
 		this.courseService.getCourses().subscribe((data: Course[]) => {
-			console.log(data);
 			this.courses = data;
 			this.closeErrorMessage();
 		}, (error) => {
-			console.log(error);
 			this.errorMessage = error.error;
 		});
 
 		this.classroomService.getClassrooms().subscribe((data: Classroom[]) => {
-			console.log(data);
 			this.classrooms = data;
 			this.closeErrorMessage();
 		}, (error) => {
-			console.log(error);
 			this.errorMessage = error.error;
 		});
 
 		this.scheduleService.getSchedule(scheduleID).subscribe((data: Schedule) => {
-			console.log(data);
 			this.schedule = data;
 			this.closeErrorMessage;
 		}, (error) => {
-			console.log(error);
 			this.errorMessage = error.error;
 		});
-
-		console.log(this.viewDate);
 	}
 
 	getEventTitle(lecture: Lecture): string {
@@ -116,16 +109,6 @@ export class SchedulePlannerComponent implements OnInit {
 	}
 
 	add() {
-		// this.events = [
-		// 	...this.events,
-		// 	{
-		// 		start: new Date(1970, 5, 1, 15, 0, 0, 0),
-		// 		title: 'asdasasdasd',
-		// 		end: new Date(1970, 5, 1, 16, 0, 0, 0)
-		// 	}
-		//   ];
-		console.log('ADD');
-		console.log(this.lectureForm);
 		let course: Course = this.courses.find(x => x.predmetID == this.lectureForm.value.course);
 		let courseBean: CourseBean = new CourseBean(course.predmetID, course.naziv, course.godina, course.obavezan ? 1 : 0);
 		let lecturer: Lecturer = this.courseLecturers.find(x => x.predavacID == this.lectureForm.value.lecturer);
@@ -190,14 +173,11 @@ export class SchedulePlannerComponent implements OnInit {
 			this.lectureForm.reset();
 			this.closeErrorMessage();
 		}, (error) => {
-			console.log(error);
 			this.errorMessage = error.error;
 		});	
 	}
 
 	update() {
-		console.log("UPDATE");
-		console.log(this.lectureForm);
 		if (this.selectedLecture !== null) {
 			let course: Course = this.courses.find(x => x.predmetID == this.lectureForm.value.course);
 			let courseBean: CourseBean = new CourseBean(course.predmetID, course.naziv, course.godina, course.obavezan ? 1 : 0);
@@ -266,24 +246,18 @@ export class SchedulePlannerComponent implements OnInit {
 						  },
 						  draggable: true
 					}
-					// let eventIndex = this.events.indexOf(event);
-					// this.events.splice(eventIndex, 1, event);
-					// this.events = this.events;
 					this.events = [...this.events.filter(x => x.id != event.id), event];
 					this.selectedLecture = null;
 					this.lectureForm.reset();
 					this.closeErrorMessage();
 				}
 			}, (error) => {
-				console.log(error);
 				this.errorMessage = error.error;
 			});
 		}
 	}
 
 	delete() {
-		console.log("DELETE");
-		console.log(this.lectureForm);
 		this.schedulePlannerService.deleteLecture(this.selectedLecture.predavanjeID).subscribe((res: boolean) => {
 			if (res === true) {
 				let index = this.lectures.indexOf(this.selectedLecture);
@@ -294,7 +268,6 @@ export class SchedulePlannerComponent implements OnInit {
 			this.lectureForm.reset();
 			this.closeErrorMessage(); 
 		}, (error) => {
-			console.log(error);
 			this.errorMessage = error.error;
 		});
 	}
@@ -304,10 +277,6 @@ export class SchedulePlannerComponent implements OnInit {
 		newStart,
 		newEnd
 	}: CalendarEventTimesChangedEvent): void {
-		console.log('EVENT TIME CHANGE');
-		console.log(event);
-		console.log(newStart);
-		console.log(newEnd);
 		let dayDate: string;
 		let day: string;
 		switch(newStart.getDate()) {
@@ -369,14 +338,11 @@ export class SchedulePlannerComponent implements OnInit {
 				this.closeErrorMessage();
 				}
 			}, (error) => {
-				console.log(error);
 				this.errorMessage = error.error;
 		});
 	}
 	
 	handleEvent(action: string, event: CalendarEvent): void {
-		console.log('EVENT CLICKED');
-		console.log(event);
 		this.selectedLecture = this.lectures.find(x => x.predavanjeID == event.id);
 		this.onCourseSelect(this.selectedLecture.predavacBean.predmetBean.predmetID);
 		let from: Date = new Date(Date.parse(this.selectedLecture.od));
@@ -398,6 +364,7 @@ export class SchedulePlannerComponent implements OnInit {
 
 	onCourseSelect(courseID: number) {
 		this.courseLecturers = this.courses.find(x => x.predmetID == courseID).predavaci;
+		this.lectureForm.form.patchValue({lecturer: this.courseLecturers[0].predavacID});
 	}
 
 	closeErrorMessage() {

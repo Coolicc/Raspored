@@ -21,32 +21,25 @@ export class SchedulesComponent implements OnInit {
     this.errorMessage = null;
     this.selectedSchedule = null;
     this.scheduleService.getSchedules().subscribe((data: Schedule[]) => {
-			console.log(data);
 			this.schedules = data;
 			this.closeErrorMessage();
 		}, (error) => {
-			console.log(error);
 			this.errorMessage = error.error;
 		});
   }
 
-  add() {
-    console.log("ADD");
-		console.log(this.scheduleForm);
+    add() {
 		let schedule: Schedule = new Schedule(null, this.scheduleForm.value.name, this.scheduleForm.value.course, this.scheduleForm.value.year, this.schedules.length);
 		this.scheduleService.addSchedule(schedule).subscribe((newSchedule: Schedule) => {
 			this.schedules.push(newSchedule);
 			this.scheduleForm.reset();
 			this.closeErrorMessage();
 		}, (error) => {
-			console.log(error);
 			this.errorMessage = error.error;
 		});	
-  }
+    }
 
-  update() {
-        console.log("UPDATE");
-        console.log(this.scheduleForm);
+    update() {
         if (this.selectedSchedule !== null) {
             let schedule: Schedule = new Schedule(this.selectedSchedule.rasporedID, this.scheduleForm.value.name, this.scheduleForm.value.course, this.scheduleForm.value.year, this.scheduleForm.value.priority);
             this.scheduleService.updateSchedule(schedule).subscribe((res: boolean) => {
@@ -58,15 +51,12 @@ export class SchedulesComponent implements OnInit {
                     this.closeErrorMessage();
                 }
             }, (error) => {
-                console.log(error);
                 this.errorMessage = error.error;
             });
         }
     }
 
     delete(schedule: Schedule) {
-        console.log("DELETE");
-        console.log(schedule);
         this.scheduleService.deleteSchedule(schedule.rasporedID).subscribe((res: boolean) => {
             if (res === true) {
                 for( var i = 0; i < this.schedules.length; i++){ 
@@ -79,7 +69,6 @@ export class SchedulesComponent implements OnInit {
             this.selectedSchedule = null;
             this.closeErrorMessage(); 
         }, (error) => {
-            console.log(error);
             this.errorMessage = error.error;
         });
     }
@@ -149,7 +138,6 @@ export class SchedulesComponent implements OnInit {
     onRowSelect(schedule: Schedule) {
         this.selectedSchedule = schedule;
         this.scheduleForm.form.patchValue({name: schedule.naziv, course: schedule.smer, year: schedule.godina, priority: schedule.prioritet});
-        console.log(this.selectedSchedule);
     }
 
     up(schedule: Schedule) {
@@ -168,14 +156,12 @@ export class SchedulesComponent implements OnInit {
                         this.closeErrorMessage();
                     }
                 }, (error) => {
-                    console.log(error);
                     scheduleUp.prioritet = schedule.prioritet;
                     schedule.prioritet = schedule.prioritet + 1;
                 })
                 this.closeErrorMessage();
             }
         }, (error) => {
-            console.log(error);
             scheduleUp.prioritet = schedule.prioritet;
             schedule.prioritet = schedule.prioritet + 1;
         });
@@ -197,21 +183,18 @@ export class SchedulesComponent implements OnInit {
                         this.closeErrorMessage();
                     }
                 }, (error) => {
-                    console.log(error);
                     scheduleUp.prioritet = schedule.prioritet;
                     schedule.prioritet = schedule.prioritet - 1;
                 })
                 this.closeErrorMessage();
             }
         }, (error) => {
-            console.log(error);
             scheduleUp.prioritet = schedule.prioritet;
             schedule.prioritet = schedule.prioritet - 1;
         });
     }
 
     closeErrorMessage() {
-        console.log("CLOSE ERROR MESSAGE");
         this.errorMessage = null;
     }
 
