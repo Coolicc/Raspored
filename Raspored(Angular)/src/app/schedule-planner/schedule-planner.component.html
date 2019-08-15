@@ -1,5 +1,5 @@
 <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-3 position-fixed h-100" style="overflow-y: auto;">
             <form class="py-3" (ngSubmit)="add()" #f="ngForm">
                 <div *ngIf="errorMessage !== null" class="alert alert-danger" role="alert">
                     <button type="button" class="close" data-dismiss="alert" (click)="closeErrorMessage()">&times;</button>
@@ -50,7 +50,10 @@
                     <button [disabled]="selectedLecture == null" (click)="delete()" type="button" class="btn btn-primary m-1">Obriši</button>
             </form>
         </div>
-        <div class="col-md-9 border-left">
+        <div class="col-md-9 border-left offset-md-3">
+            <div class="row justify-content-center my-3">
+                <h3>{{schedule.godina}}. godina, {{schedule.smer}}, {{schedule.naziv}}</h3>
+            </div>
             <mwl-calendar-week-view
             [hourSegments]="4"
             [viewDate]="viewDate"

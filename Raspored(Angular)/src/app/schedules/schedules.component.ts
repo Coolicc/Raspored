@@ -1,8 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { Schedule } from './schedule.model';
 import { NgForm } from '@angular/forms';
 import { ScheduleService } from './schedules.service';
 import { Router } from '@angular/router';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {ScheduleModalComponent} from './schedule-modal/schedule-modal.component';
 
 @Component({
   selector: 'app-schedules',
@@ -10,38 +12,26 @@ import { Router } from '@angular/router';
   styleUrls: ['./schedules.component.css']
 })
 export class SchedulesComponent implements OnInit {
-  @ViewChild('f',{static:false}) scheduleForm: NgForm;
-  selectedSchedule: Schedule;
-  errorMessage: string;
-  schedules: Schedule[];
+    selectedSchedule: Schedule;
+    errorMessage: string;
+    schedules: Schedule[];
 
-  constructor(private scheduleService: ScheduleService, private router: Router) {}
+    constructor(private scheduleService: ScheduleService, private router: Router, private modalService: NgbModal) {}
 
-  ngOnInit() {
-    this.errorMessage = null;
-    this.selectedSchedule = null;
-    this.scheduleService.getSchedules().subscribe((data: Schedule[]) => {
-			this.schedules = data;
-			this.closeErrorMessage();
-		}, (error) => {
-			this.errorMessage = error.error;
-		});
-  }
-
-    add() {
-		let schedule: Schedule = new Schedule(null, this.scheduleForm.value.name, this.scheduleForm.value.course, this.scheduleForm.value.year, this.schedules.length);
-		this.scheduleService.addSchedule(schedule).subscribe((newSchedule: Schedule) => {
-			this.schedules.push(newSchedule);
-			this.scheduleForm.reset();
-			this.closeErrorMessage();
-		}, (error) => {
-			this.errorMessage = error.error;
-		});	
+    ngOnInit() {
+        this.errorMessage = null;
+        this.selectedSchedule = null;
+        this.scheduleService.getSchedules().subscribe((data: Schedule[]) => {
+                this.schedules = data;
+                this.closeErrorMessage();
+            }, (error) => {
+                this.errorMessage = error.error;
+            });
     }
 
-    update() {
+    update(form: NgForm) {
         if (this.selectedSchedule !== null) {
-            let schedule: Schedule = new Schedule(this.selectedSchedule.rasporedID, this.scheduleForm.value.name, this.scheduleForm.value.course, this.scheduleForm.value.year, this.scheduleForm.value.priority);
+            let schedule: Schedule = new Schedule(this.selectedSchedule.rasporedID, form.value.name, form.value.course, form.value.year, form.value.priority);
             this.scheduleService.updateSchedule(schedule).subscribe((res: boolean) => {
                 if (res === true) {
                     this.selectedSchedule.naziv = schedule.naziv;
@@ -135,9 +125,9 @@ export class SchedulesComponent implements OnInit {
         });
     }
 
-    onRowSelect(schedule: Schedule) {
+    onRowSelect(schedule: Schedule, form: NgForm) {
         this.selectedSchedule = schedule;
-        this.scheduleForm.form.patchValue({name: schedule.naziv, course: schedule.smer, year: schedule.godina, priority: schedule.prioritet});
+        form.form.patchValue({name: schedule.naziv, course: schedule.smer, year: schedule.godina, priority: schedule.prioritet});
     }
 
     up(schedule: Schedule) {
@@ -200,6 +190,23 @@ export class SchedulesComponent implements OnInit {
 
     openSchedule(schedule: Schedule) {
         this.router.navigate(['/raspored'], { queryParams: { schedule: schedule.rasporedID } });
+    }
+
+    openAddModal() {
+        const modalRef = this.modalService.open(ScheduleModalComponent);
+        modalRef.result.then((result) => {
+            if (result) {
+                let schedule: Schedule = new Schedule(null, result.value.name, result.value.course, result.value.year, this.schedules.length);
+		        this.scheduleService.addSchedule(schedule).subscribe((newSchedule: Schedule) => {
+			        this.schedules.push(newSchedule);
+                    this.closeErrorMessage();
+		        }, (error) => {
+			        this.errorMessage = error.error;
+		        });
+            }
+        }).catch((error) => {
+            console.log(error);
+        });
     }
 
 }

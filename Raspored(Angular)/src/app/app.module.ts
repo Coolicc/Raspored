@@ -16,6 +16,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { BasicAuthHtppInterceptorService } from './login/basic-auth.http-interceptor';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ScheduleModalComponent } from './schedules/schedule-modal/schedule-modal.component';
 
 @NgModule({
   declarations: [
@@ -27,9 +29,11 @@ import { BasicAuthHtppInterceptorService } from './login/basic-auth.http-interce
     SchedulesComponent,
     SchedulePlannerComponent,
     LoginComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    ScheduleModalComponent
   ],
   imports: [
+    NgbModule,
     BrowserModule,
     FormsModule,
     AppRoutingModule,
@@ -45,6 +49,9 @@ import { BasicAuthHtppInterceptorService } from './login/basic-auth.http-interce
     {  
     provide:HTTP_INTERCEPTORS, useClass:BasicAuthHtppInterceptorService, multi:true 
   }],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+    ScheduleModalComponent
+  ]
 })
 export class AppModule { }

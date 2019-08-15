@@ -1,0 +1,39 @@
+<div class="modal-header">
+        <h5 class="modal-title">Dodaj raspored</h5>
+        <button type="button" class="close" (click)="close()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      
+      <div class="modal-body">
+                <form class="justify-content-center" (ngSubmit)="onSubmit()" #f="ngForm">
+                  <div class="form-group">
+                      <label for="name" class="mr-sm-2">Naziv:</label>
+                      <input type="text" class="form-control mb-2 mr-sm-2" id="name" name="name" ngModel>
+                  </div>
+                  <div class="form-group">
+                      <label for="name" class="mr-sm-2">Smer:</label>
+                      <input type="text" class="form-control mb-2 mr-sm-2" id="course" name="course" ngModel>
+                  </div>
+                  <div class="form-group">
+                      <label for="name" class="mr-sm-2">Godina:</label>
+                      <select name="year" class="form-control mb-2 mr-sm-2" id="year" ngModel>
+                          <option value="1">1</option>
+                          <option value="2">2</option>
+                          <option value="3">3</option>
+                          <option value="4">4</option>
+                          <option value="5">5</option>
+                          <option value="6">6</option>
+                          <option value="7">7</option>
+                          <option value="8">8</option>
+                      </select>
+                  </div>
+                      <input type="hidden" name="priority" ngModel>
+                    </form>
+                  
+      </div>
+      <div class="modal-footer">
+          <button type="button" class="btn btn-primary m-1" (click)="onSubmit()">Dodaj</button>
+          <button type="button" class="btn btn-primary" (click)="close()">Izađi</button>
+      </div>
+  

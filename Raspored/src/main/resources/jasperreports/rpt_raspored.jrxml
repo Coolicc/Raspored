@@ -21,7 +21,7 @@
 			<band height="80">
 				<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				<staticText>
-					<reportElement mode="Opaque" x="0" y="50" width="80" height="30" forecolor="#FFFFFF" backcolor="#0275D8" uuid="79aa8a4f-ccfa-40a3-af93-5dae569eceba"/>
+					<reportElement mode="Opaque" x="0" y="50" width="80" height="30" forecolor="#000000" backcolor="#C9F2FF" uuid="79aa8a4f-ccfa-40a3-af93-5dae569eceba"/>
 					<box>
 						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#FFFFFF"/>
 						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#FFFFFF"/>
@@ -29,12 +29,12 @@
 						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#FFFFFF"/>
 					</box>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font fontName="tahoma" size="12" isBold="true"/>
+						<font fontName="tahoma" size="12" isBold="false"/>
 					</textElement>
 					<text><![CDATA[Vreme]]></text>
 				</staticText>
 				<staticText>
-					<reportElement mode="Opaque" x="80" y="50" width="106" height="30" forecolor="#FFFFFF" backcolor="#0275D8" uuid="89ca74ad-f21f-441b-be77-398747f2f35e"/>
+					<reportElement mode="Opaque" x="80" y="50" width="106" height="30" forecolor="#000000" backcolor="#C9F2FF" uuid="89ca74ad-f21f-441b-be77-398747f2f35e"/>
 					<box>
 						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#FFFFFF"/>
 						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#FFFFFF"/>
@@ -42,12 +42,12 @@
 						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#FFFFFF"/>
 					</box>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font fontName="tahoma" size="12" isBold="true"/>
+						<font fontName="tahoma" size="12" isBold="false"/>
 					</textElement>
 					<text><![CDATA[Sala]]></text>
 				</staticText>
 				<staticText>
-					<reportElement mode="Opaque" x="186" y="50" width="192" height="30" forecolor="#FFFFFF" backcolor="#0275D8" uuid="a8a9a1ab-0a10-4c32-9243-02dfd36519a9"/>
+					<reportElement mode="Opaque" x="186" y="50" width="192" height="30" forecolor="#000000" backcolor="#C9F2FF" uuid="a8a9a1ab-0a10-4c32-9243-02dfd36519a9"/>
 					<box>
 						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#FFFFFF"/>
 						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#FFFFFF"/>
@@ -55,12 +55,12 @@
 						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#FFFFFF"/>
 					</box>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font fontName="tahoma" size="12" isBold="true"/>
+						<font fontName="tahoma" size="12" isBold="false"/>
 					</textElement>
 					<text><![CDATA[Predmet]]></text>
 				</staticText>
 				<staticText>
-					<reportElement mode="Opaque" x="378" y="50" width="112" height="30" forecolor="#FFFFFF" backcolor="#0275D8" uuid="7c956e95-365c-4101-9742-bf947bfe35c3"/>
+					<reportElement mode="Opaque" x="378" y="50" width="112" height="30" forecolor="#000000" backcolor="#C9F2FF" uuid="7c956e95-365c-4101-9742-bf947bfe35c3"/>
 					<box>
 						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#FFFFFF"/>
 						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#FFFFFF"/>
@@ -68,12 +68,12 @@
 						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#FFFFFF"/>
 					</box>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font fontName="tahoma" size="12" isBold="true"/>
+						<font fontName="tahoma" size="12" isBold="false"/>
 					</textElement>
 					<text><![CDATA[Predavač]]></text>
 				</staticText>
 				<staticText>
-					<reportElement mode="Opaque" x="490" y="50" width="65" height="30" forecolor="#FFFFFF" backcolor="#0275D8" uuid="cec73173-1b24-4077-bf7c-8de3a41cd184">
+					<reportElement mode="Opaque" x="490" y="50" width="65" height="30" forecolor="#000000" backcolor="#C9F2FF" uuid="cec73173-1b24-4077-bf7c-8de3a41cd184">
 						<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					</reportElement>
 					<box>
@@ -83,14 +83,14 @@
 						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#FFFFFF"/>
 					</box>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font fontName="tahoma" size="12" isBold="true"/>
+						<font fontName="tahoma" size="12" isBold="false"/>
 					</textElement>
 					<text><![CDATA[Tip]]></text>
 				</staticText>
 				<textField>
 					<reportElement x="80" y="10" width="400" height="40" uuid="983b232f-b62c-42e8-a6f6-5eec1b853ce9"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font fontName="tahoma" size="16" isBold="true"/>
+						<font fontName="tahoma" size="13" isBold="false"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{raspored}]]></textFieldExpression>
 				</textField>
@@ -108,7 +108,7 @@
 			<band height="30">
 				<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				<textField>
-					<reportElement mode="Opaque" x="0" y="0" width="555" height="30" forecolor="#FFFFFF" backcolor="#0275D8" uuid="78e4d7de-e974-4fc4-a092-e8aa2131173e">
+					<reportElement mode="Opaque" x="0" y="0" width="555" height="30" forecolor="#000000" backcolor="#C9F2FF" uuid="78e4d7de-e974-4fc4-a092-e8aa2131173e">
 						<property name="com.jaspersoft.studio.unit.width" value="px"/>
 						<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
 					</reportElement>
@@ -119,7 +119,7 @@
 						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#FFFFFF"/>
 					</box>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font fontName="tahoma" size="12" isBold="true"/>
+						<font fontName="tahoma" size="12" isBold="false"/>
 						<paragraph leftIndent="0"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{dan}]]></textFieldExpression>
@@ -133,11 +133,11 @@
 	<title>
 		<band height="80" splitType="Stretch">
 			<staticText>
-				<reportElement mode="Opaque" x="0" y="0" width="555" height="80" forecolor="#FFFFFF" backcolor="#0275D8" uuid="a0b68a7b-eed6-4602-afb1-14f1d40a6df1">
+				<reportElement mode="Opaque" x="0" y="0" width="555" height="80" forecolor="#000000" backcolor="#C9F2FF" uuid="a0b68a7b-eed6-4602-afb1-14f1d40a6df1">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="tahoma" size="33" isBold="true"/>
+					<font fontName="tahoma" size="22" isBold="false"/>
 				</textElement>
 				<text><![CDATA[Raspored]]></text>
 			</staticText>

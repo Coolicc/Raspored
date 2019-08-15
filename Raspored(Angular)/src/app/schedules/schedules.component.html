@@ -1,34 +1,13 @@
 <div class="row">
     <div class="col-md-8 offset-md-2">
-        <div class="py-5">
+        <div class="py-3">
             <h1 class="text-center">Rasporedi</h1>
         </div>
         <div *ngIf="errorMessage !== null" class="alert alert-danger" role="alert">
             <button type="button" class="close" data-dismiss="alert" (click)="closeErrorMessage()">&times;</button>
             {{errorMessage}}
         </div>
-        <form class="form-inline justify-content-center" (ngSubmit)="add()" #f="ngForm">
-            <div class="form-group">
-                <label for="name" class="mr-sm-2">Naziv:</label>
-                <input type="text" class="form-control mb-2 mr-sm-2" id="name" name="name" ngModel>
-                <label for="name" class="mr-sm-2">Smer:</label>
-                <input type="text" class="form-control mb-2 mr-sm-2" id="course" name="course" ngModel>
-                <label for="name" class="mr-sm-2">Godina:</label>
-                <select name="year" class="form-control mb-2 mr-sm-2" id="year" ngModel>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                </select>
-                <input type="hidden" name="priority" ngModel>
-            </div>
-            <button type="submit" class="btn btn-primary m-1">Dodaj</button>
-            <button [disabled]="selectedSchedule == null" (click)="update()" type="button" class="btn btn-primary m-1">Zavrsi izmenu</button>
-        </form>
+        
         <div class="row">
             <div class="col text-center">
                 <button type="button" class="btn btn-primary m-1" (click)="exportAll()">Izvezi sve rasporede kao PDF</button>
@@ -39,40 +18,78 @@
                 (rasporedi će biti export-ovani u redu u kojem su prikazani)
             </div>
         </div>
-        <div class="list-group py-3">
-                <div class="list-group-item list-group-item-action" *ngFor="let schedule of schedules"
-                [ngClass]="{'list-group-item-primary': selectedSchedule && selectedSchedule.rasporedID == schedule.rasporedID}">
-                    {{schedule.godina}}. godina, {{schedule.smer}}, {{schedule.naziv}}
-                    <button type="button" class="btn btn-primary m-1 float-right" (click)="export(schedule)">PDF</button>
-                    <button type="button" class="btn btn-primary m-1 float-right" (click)="delete(schedule)">Obriši</button>
-                    <button type="button" class="btn btn-primary m-1 float-right" (click)="onRowSelect(schedule)">Izmeni</button>
-                    <button type="button" class="btn btn-primary m-1 float-right" (click)="openSchedule(schedule)">Otvori</button>
-                    <button type="button" class="btn btn-primary m-1 float-right" (click)="down(schedule)">&darr;</button>
-                    <button type="button" class="btn btn-primary m-1 float-right" (click)="up(schedule)">&uarr;</button>
-                <!--    <div class="row" *ngIf="selectedSchedule !== null && selectedSchedule.rasporedID === schedule.rasporedID">
-                        <form class="form-inline justify-content-center pt-4" (ngSubmit)="update(editForm)" #editForm="ngForm">
-                            <div class="form-group">
-                                <label for="name" class="mr-sm-2">Naziv:</label>
-                                <input type="text" class="form-control mb-2 mr-sm-2" id="name" name="name" ngModel>
-                                <label for="name" class="mr-sm-2">Smer:</label>
-                                <input type="text" class="form-control mb-2 mr-sm-2" id="course" name="course" ngModel>
-                                <label for="name" class="mr-sm-2">Godina:</label>
-                                <select name="year" class="form-control mb-2 mr-sm-2" id="year" ngModel>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                    <option value="6">6</option>
-                                    <option value="7">7</option>
-                                    <option value="8">8</option>
-                                </select>
-                            </div>
-                            <button type="submit" class="btn btn-primary m-1">Zavrsi izmenu</button>
-                        </form>
-                    </div>
-                -->
+        <div class="row">
+            <div class="col-4 offset-8">
+                <button type="button" class="btn btn-success m-1 float-right" (click)="openAddModal()">Dodaj raspored</button>
+            </div>
+        </div>
+        <div class="row border-top border-bottom mt-3 text-center">
+            <div class="col-3 font-weight-bold">
+                Naziv
+            </div>
+            <div class="col-2 font-weight-bold">
+                Godina
+            </div>
+            <div class="col-2 font-weight-bold">
+                Smer
+            </div>
+            <div class="col-2 font-weight-bold">
+                Prioritet
+            </div>
+            <div class="col-3 font-weight-bold">
+
+            </div>
+        </div>
+        <div class="row text-center" *ngFor="let schedule of schedules; let i = index" [ngClass]="{'bg-light': i % 2 == 1}">
+            <form class="w-100" (ngSubmit)="update(form)" #form="ngForm">
+                <div class="row">
+                <div class="col-3 my-auto">
+                    <span *ngIf="selectedSchedule == null || selectedSchedule.rasporedID != schedule.rasporedID">
+                        {{schedule.naziv}}
+                    </span>
+                    <input value="adsa" [hidden]="selectedSchedule == null || selectedSchedule.rasporedID != schedule.rasporedID"
+                    type="text" class="form-control" id="name" name="name" ngModel>
                 </div>
+                <div class="col-2 my-auto">
+                    <span *ngIf="selectedSchedule == null || selectedSchedule.rasporedID != schedule.rasporedID">
+                        {{schedule.godina}}.
+                    </span>
+                    <select [hidden]="selectedSchedule == null || selectedSchedule.rasporedID != schedule.rasporedID"
+                     name="year" class="form-control" id="year" ngModel>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                    </select>
+                </div>
+                <div class="col-2 my-auto">
+                    <span *ngIf="selectedSchedule == null || selectedSchedule.rasporedID != schedule.rasporedID">
+                        {{schedule.smer}}
+                    </span>
+                    <input [hidden]="selectedSchedule == null || selectedSchedule.rasporedID != schedule.rasporedID"
+                     type="text" class="form-control" id="course" name="course" ngModel>
+                </div>
+                <div class="col-2 my-auto">
+                    <button type="button" class="btn btn-primary m-1" (click)="up(schedule)">&uarr;</button>
+                    <button type="button" class="btn btn-primary m-1" (click)="down(schedule)">&darr;</button>
+                </div>
+                <div class="col-3 my-auto">
+                    <span *ngIf="selectedSchedule == null || selectedSchedule.rasporedID != schedule.rasporedID">
+                        <button type="button" class="btn btn-primary m-1" (click)="openSchedule(schedule)">Otvori</button>
+                        <button type="button" class="btn btn-primary m-1" (click)="onRowSelect(schedule, form)">Izmeni</button>
+                        <button type="button" class="btn btn-primary m-1" (click)="export(schedule)">PDF</button>
+                    </span>
+                    <span *ngIf="selectedSchedule != null && selectedSchedule.rasporedID == schedule.rasporedID">
+                        <button type="submit" class="btn btn-primary m-1">Sačuvaj</button>
+                        <button type="button" class="btn btn-danger m-1" (click)="delete(schedule)">Obriši</button>
+                    </span>
+                </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>
